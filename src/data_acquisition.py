@@ -2,7 +2,7 @@
 This module contains functions for downloading and verifying data from
 the internet.
 """
-ipmort urllib2
+import urllib2
 
 def download_data(url):
     """
