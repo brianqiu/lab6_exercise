@@ -3,6 +3,9 @@ This module contains functions for downloading and verifying data from
 the internet.
 """
 import urllib2
+import os.path
+import hashlib
+import nibabel as nib
 
 def download_data(url):
     """
@@ -24,7 +27,7 @@ def download_data(url):
     Consider the urllib2 or wget python modules
     """
     file = urllib2.urlopen(url)
-    return url.read(file) 
+    return file.read() 
 
 def save_data(data, output_filename):
     """
@@ -51,7 +54,13 @@ def save_data(data, output_filename):
     ----
     Check out the os module for determining whether a file exists already.
     """
-    return NotImplemented
+    if (os.path.isfile(output_filename)):
+        return 1
+    else:
+        file = open(output_filename, "w")
+        file.write(data)
+        file.close()
+    return 0
 
 def verify_data(data, known_checksum):
     """
